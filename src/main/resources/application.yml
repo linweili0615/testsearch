@@ -1,0 +1,32 @@
+server:
+  port: 8888
+
+spring:
+  redis:
+    host: node.td-k8s.com
+    port: 1379
+    password: mWRK6joVy5No
+    database: 5
+    #连接超时时间
+    timeout: 10000
+    jedis:
+      pool:
+        #最大连接数
+        max-active: 8
+        #最大阻塞等待时间(负数表示没限制)
+        max-wait: -1
+        #最大空闲
+        max-idle: 8
+        #最小空闲
+        min-idle: 0
+  datasource:
+    url: jdbc:sqlserver://10.100.12.101:1433;DatabaseName=www_JunTe_com
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: td_fqb
+    password: tuandaiisverygood.0.2123
+
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+
+
