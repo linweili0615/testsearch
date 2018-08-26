@@ -3,9 +3,10 @@ server:
 
 spring:
   redis:
-    host: node.td-k8s.com
-    port: 1379
-    password: mWRK6joVy5No
+#    host: node.td-k8s.com
+    host: localhost
+    port: 6379
+#    password: mWRK6joVy5No
     database: 5
     #连接超时时间
     timeout: 10000

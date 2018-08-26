@@ -18,13 +18,17 @@ public class SearchController {
     @Autowired
     private SearchService searchService;
 
-    @RequestMapping(value = "/sqlserverCode",method = RequestMethod.GET)
+    @RequestMapping(value = "/scode",method = RequestMethod.GET)
     @ResponseBody
     public CodeDTO getCodeByTel(String telno){
         if(telno !=null && telno != ""){
             try{
                 String code = searchService.getCodeByTel(telno);
-                return new CodeDTO(true,code,"查询验证码成功");
+                if(code != null || code != ""){
+                    return new CodeDTO(true, code, "查询验证码成功");
+                }else {
+                    return new CodeDTO(true, code, "暂无验证码信息");
+                }
             }catch (Exception e){
                 return new CodeDTO(true,"","查询验证码失败");
             }
@@ -34,12 +38,27 @@ public class SearchController {
 
     }
 
-    @RequestMapping(value = "/redisCode",method = RequestMethod.GET)
+    @RequestMapping(value = "/rcode",method = RequestMethod.GET)
     @ResponseBody
-    public String getCode(RedisCode redisCode){
-        redisCode.getType();
-        return "helfef";
+    public CodeDTO getCode(RedisCode redisCode){
+        System.out.println(redisCode);
+        if(redisCode.getKey() != null && redisCode.getKey() != ""){
+            try {
+                String code = searchService.getCodeByTelInRedis(redisCode).toString();
+                System.out.println("final code:" + code);
+                if(code != null || code != ""){
+                    return new CodeDTO(true, code, "查询验证码成功");
+                }else {
+                    return new CodeDTO(true, code, "暂无验证码信息");
+                }
 
+            }catch (Exception e){
+                return new CodeDTO(true, "", "查询验证码失败");
+            }
+
+        }else {
+            return new CodeDTO(false, "", "查询key不能为空");
+        }
     }
 
 }
