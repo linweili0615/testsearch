@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>验证码查询</title>
+
+</head>
+<body>
+<form>
+    <select id="types">
+        <option value="string">字符串：</option>
+        <option value="hash">哈希：</option>
+    </select>
+    <div>
+        <h4 id="s">
+            key:<input type="text">
+        </h4>
+        <h4 id="h" style="display:none">
+            hash: <input type="text">key:<input type="text">
+        </h4>
+    </div>
+    <button type="button">查询</button>
+</form>
+
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#types").change(function(){
+            if ($("#types").find("option:selected").val() == "hash"){
+                $("#s").hide();
+                $("#h").show();
+            }else {
+                $("#h").hide();
+                $("#s").show();
+            }
+        });
+    });
+</script>
+</body>
+</html>
