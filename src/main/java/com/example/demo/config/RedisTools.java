@@ -18,16 +18,18 @@ public class RedisTools {
     }
 
     public Object getCodeByHash(RedisCode redisCode){
-        System.out.println("getCodeByHash");
-        System.out.println(redisCode.getHash() +","+ redisCode.getKey());
+//        System.out.println("getCodeByHash");
+//        System.out.println(redisCode.getHash() +","+ redisCode.getKey());
+        Object code;
         try {
-            Object code = redisTemplate.opsForHash().get(redisCode.getHash(), redisCode.getKey());
+            code = redisTemplate.opsForHash().get(redisCode.getHash(), redisCode.getKey());
             System.out.println("getCodeByHash:"+ code);
         }catch (Exception e){
             e.printStackTrace();
+            code = 66;
         }
+        return code;
 
-        return 666;
     }
 
     public Object getCodeByList(RedisCode redisCode){
