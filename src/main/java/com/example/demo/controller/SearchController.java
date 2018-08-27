@@ -45,7 +45,7 @@ public class SearchController {
         if(redisCode.getKey() != null && redisCode.getKey() != ""){
             try {
                 String code = searchService.getCodeByTelInRedis(redisCode).toString();
-                System.out.println("final code:" + code);
+//                System.out.println("final code:" + code);
                 if(code != null || code != ""){
                     return new CodeDTO(true, code, "查询验证码成功");
                 }else {

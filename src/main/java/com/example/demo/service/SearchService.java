@@ -28,14 +28,14 @@ public class SearchService {
         Object code;
         switch (redisCode.getType()){
             case "string" :
-                System.out.println("string");
+//                System.out.println("string");
                 code = redisTools.getCodeByString(redisCode);
-                System.out.println(code);
+//                System.out.println(code);
                 break;
             case "hash" :
-                System.out.println("hash");
+//                System.out.println("hash");
                 code = redisTools.getCodeByHash(redisCode);
-                System.out.println("code:" + code);
+//                System.out.println("code:" + code);
                 break;
             case "list" :
                 code = redisTools.getCodeByList(redisCode);

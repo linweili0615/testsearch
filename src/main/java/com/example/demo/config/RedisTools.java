@@ -12,8 +12,8 @@ public class RedisTools {
     private RedisTemplate redisTemplate;
 
     public Object getCodeByString(RedisCode redisCode){
-        System.out.println("getCodeByString");
-        System.out.println(redisCode.getKey());
+//        System.out.println("getCodeByString");
+//        System.out.println(redisCode.getKey());
         return  redisTemplate.opsForValue().get(redisCode.getKey());
     }
 
