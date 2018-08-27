@@ -24,18 +24,14 @@ public class SearchService {
         return searchDao.getCodeByTel(telno);
     }
 
-    public Object getCodeByTelInRedis(RedisCode redisCode) {
+    public Object getCodeByInRedis(RedisCode redisCode) {
         Object code;
         switch (redisCode.getType()){
             case "string" :
-//                System.out.println("string");
                 code = redisTools.getCodeByString(redisCode);
-//                System.out.println(code);
                 break;
             case "hash" :
-//                System.out.println("hash");
                 code = redisTools.getCodeByHash(redisCode);
-//                System.out.println("code:" + code);
                 break;
             case "list" :
                 code = redisTools.getCodeByList(redisCode);
@@ -50,7 +46,6 @@ public class SearchService {
                 code = null;
                 break;
         }
-        System.out.println(code);
         return code;
     }
 

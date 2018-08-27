@@ -3,38 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>验证码查询</title>
-
+    <link rel="stylesheet" href="bootstrap3/css/bootstrap.css">
 </head>
 <body>
-<form>
-    <select id="types">
-        <option value="string">字符串：</option>
-        <option value="hash">哈希：</option>
-    </select>
-    <div>
-        <h4 id="s">
-            key:<input type="text">
-        </h4>
-        <h4 id="h" style="display:none">
-            hash: <input type="text">key:<input type="text">
-        </h4>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3" style="margin-top: 5%">
+        <h3 style="text-align: center">测试环境-验证码查询</h3>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="search_type" class="col-sm-2 control-label">查询方式：</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="search_type">
+                        <option value="sql">数据库</option>
+                        <option value="string" selected>字符串</option>
+                        <option value="hash">哈希</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group" id="q" style="display:none">
+                <label for="telno" class="col-sm-2 control-label">手机号：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="telno" placeholder="请输入查询手机号">
+                </div>
+            </div>
+
+            <div class="form-group" id="s">
+                <label for="string" class="col-sm-2 control-label">key:</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="string" placeholder="请输入查询key值">
+                </div>
+            </div>
+
+            <div class="form-group" id="h" style="display:none">
+                <label for="hash" class="col-sm-2 control-label">hash:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="hash" placeholder="请输入查询hash值">
+                </div>
+                <label for="hash" class="col-sm-2 control-label">key:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="key" placeholder="请输入查询key值">
+                </div>
+            </div>
+
+            <div class="form-group" style="text-align: center">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="button" class="btn btn-primary btn-lg btn-block" id="search">查询</button>
+                </div>
+            </div>
+            <div class="form-group" style="display:none" id="res_div">
+                <label class="col-sm-2 control-label">查询结果：</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" id="res" style="font-size: x-large">暂未进行查询操作</p>
+            </div>
+            </div>
+        </form>
     </div>
-    <button type="button">查询</button>
-</form>
+
+</div>
 
 <script src="jquery-3.3.1.min.js"></script>
-<script>
-    $(document).ready(function(){
-        $("#types").change(function(){
-            if ($("#types").find("option:selected").val() == "hash"){
-                $("#s").hide();
-                $("#h").show();
-            }else {
-                $("#h").hide();
-                $("#s").show();
-            }
-        });
-    });
-</script>
+<script src="index.js"></script>
 </body>
 </html>

@@ -12,24 +12,11 @@ public class RedisTools {
     private RedisTemplate redisTemplate;
 
     public Object getCodeByString(RedisCode redisCode){
-//        System.out.println("getCodeByString");
-//        System.out.println(redisCode.getKey());
         return  redisTemplate.opsForValue().get(redisCode.getKey());
     }
 
     public Object getCodeByHash(RedisCode redisCode){
-//        System.out.println("getCodeByHash");
-//        System.out.println(redisCode.getHash() +","+ redisCode.getKey());
-        Object code;
-        try {
-            code = redisTemplate.opsForHash().get(redisCode.getHash(), redisCode.getKey());
-            System.out.println("getCodeByHash:"+ code);
-        }catch (Exception e){
-            e.printStackTrace();
-            code = 66;
-        }
-        return code;
-
+        return redisTemplate.opsForHash().get(redisCode.getHash(), redisCode.getKey());
     }
 
     public Object getCodeByList(RedisCode redisCode){
