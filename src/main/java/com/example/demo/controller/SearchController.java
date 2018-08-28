@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import com.example.demo.domain.RedisCode;
 import com.example.demo.dto.CodeDTO;
 import com.example.demo.service.SearchService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.stereotype.Controller;
@@ -18,33 +20,39 @@ import java.sql.SQLException;
 @Controller
 public class SearchController {
 
+    private static final Logger log = LoggerFactory.getLogger(SearchController.class);
+
     @Autowired
     private SearchService searchService;
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String index(){
+        log.info("访问页面");
         return "index";
     }
 
     @RequestMapping(value = "/scode",method = RequestMethod.POST)
     @ResponseBody
     public CodeDTO getCodeByTel(RedisCode redisCode){
-        System.out.println(redisCode.toString());
-
+//        System.out.println(redisCode.toString());
+        log.info("redisCode:{}",redisCode.toString());
         if(redisCode.getType().equals("sql") && redisCode.getKey() !=null && redisCode.getKey() != ""){
             try{
                 String code = searchService.getCodeByTel(redisCode.getKey());
                 return returnMsg(code);
             }catch (NullPointerException e){
 //                e.printStackTrace();
-                System.out.println("暂无此验证码信息");
+//                System.out.println("暂无此验证码信息");
+                log.info("暂无此验证码信息");
                 return new CodeDTO(true, "", "暂无此验证码信息");
             } catch (CannotGetJdbcConnectionException e){
-//                e.printStackTrace();
-                System.out.println("数据库连接超时");
+                e.printStackTrace();
+//                System.out.println("数据库连接超时");
+                log.error("数据库连接超时");
                 return new CodeDTO(true,"","数据库连接超时");
             }
         }else {
+            log.error("查询参数错误");
             return new CodeDTO(false,"","查询参数错误");
         }
 

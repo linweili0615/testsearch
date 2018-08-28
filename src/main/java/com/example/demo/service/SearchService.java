@@ -4,6 +4,8 @@ import com.example.demo.config.RedisTools;
 import com.example.demo.dao.SearchDao;
 import com.example.demo.domain.RedisCode;
 import org.apache.ibatis.annotations.Param;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class SearchService {
 
+    private static final Logger log = LoggerFactory.getLogger(SearchService.class);
+
     @Autowired
     private SearchDao searchDao;
 
@@ -21,10 +25,12 @@ public class SearchService {
     private RedisTools redisTools;
 
     public String getCodeByTel(String telno){
+        log.info("getCodeByTel:{}",telno);
         return searchDao.getCodeByTel(telno);
     }
 
     public Object getCodeByInRedis(RedisCode redisCode) {
+        log.info("getCodeByInRedis:{}",redisCode);
         Object code;
         switch (redisCode.getType()){
             case "string" :
