@@ -63,7 +63,7 @@ public class SearchController {
         if(code != null || code != ""){
             return new CodeDTO(true, code, "查询验证码成功");
         }else {
-            return new CodeDTO(true, code, "暂无验证码信息");
+            return new CodeDTO(true, "", "暂无验证码信息");
         }
     }
 
