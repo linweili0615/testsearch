@@ -31,6 +31,11 @@ public class SearchController {
         return "index";
     }
 
+    @RequestMapping(value = "/card",method = RequestMethod.GET)
+    public String card(){
+        return "card";
+    }
+
     @RequestMapping(value = "/scode",method = RequestMethod.POST)
     @ResponseBody
     public CodeDTO getCodeByTel(RedisCode redisCode){
@@ -99,5 +104,15 @@ public class SearchController {
             return new CodeDTO(false, "", "查询参数错误");
         }
     }
+
+    @RequestMapping(value = "/target",method = RequestMethod.GET)
+    @ResponseBody
+    public String sub(String u){
+        String keyStr = u.substring(u.length() - 4);
+        Integer key = Integer.parseInt(keyStr, 16) % 32;
+        return "target: "+ key;
+    }
+
+
 
 }
