@@ -44,6 +44,7 @@ public class SearchController {
         if(redisCode.getType().equals("sql") && redisCode.getKey() !=null && redisCode.getKey() != ""){
             try{
                 String code = searchService.getCodeByTel(redisCode.getKey());
+                log.info("code:{}",code);
                 return returnMsg(code);
             }catch (NullPointerException e){
 //                e.printStackTrace();
@@ -63,9 +64,12 @@ public class SearchController {
 
     }
 
-
     CodeDTO returnMsg(String code){
         if(code != null || code != ""){
+            if(code.length() == 5){
+                code = '0'+ code;
+            }
+            log.info("returnMsg:" + code);
             return new CodeDTO(true, code, "查询验证码成功");
         }else {
             return new CodeDTO(true, "", "暂无验证码信息");
