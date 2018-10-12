@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.service.ThreadService;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -9,14 +10,13 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/performance")
 public class PerformanceController {
 
     /**
      * CPU占用过高
      */
-    @RequestMapping("/cpu")
-    public void test_cpu() {
+    @RequestMapping(value = "/test_cpu", method = RequestMethod.GET)
+    public void t6() {
         int num = 0;
         long start = System.currentTimeMillis() / 1000;
         while (true) {
@@ -35,8 +35,8 @@ public class PerformanceController {
     /**
      * 堆溢出
      */
-    @RequestMapping("/head")
-    public void test_head() {
+    @RequestMapping("/test_stack")
+    public void t5() {
         List<byte[]> list = new ArrayList<>();
         int i=0;
         while(true){
@@ -76,8 +76,8 @@ public class PerformanceController {
     /**
      * 栈空间不足StackOverflowError
      */
-    @RequestMapping("/stack/overflow")
-    public void test_stack() {
+    @RequestMapping("/test_over")
+    public void t4() {
         StackSOFTest test = null;
         try {
             test = new StackSOFTest();
@@ -93,8 +93,8 @@ public class PerformanceController {
     /**
      * 栈空间不足OutOfMemberError
      */
-    @RequestMapping("/stack/outofmember")
-    public void test_outofmember() {
+    @RequestMapping("/test_out")
+    public void t3() {
         StackSOFTest test = new StackSOFTest();
         test.oomMethod();
 
@@ -104,8 +104,8 @@ public class PerformanceController {
      * 持久代溢出
      * -XX:PermSize=10m -XX:MaxPermSize=10m
      */
-    @RequestMapping("/permgenspace")
-    public void test_permgenspace() {
+    @RequestMapping("/test_old")
+    public void t2() {
         List<String> list = new ArrayList<>();
         int i=1;
         try {
@@ -122,8 +122,8 @@ public class PerformanceController {
     /**
      * 线程死锁
      */
-    @RequestMapping("/thread/dead")
-    public void test_dead() {
+    @RequestMapping("/test_lock")
+    public void t1() {
         ThreadService dt1 = new ThreadService();
         dt1.setFlag("a");
         Thread t1 = new Thread(dt1);
