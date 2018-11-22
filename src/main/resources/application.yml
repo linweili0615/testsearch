@@ -1,25 +1,17 @@
 server:
-  port: 6789
-
+  port: 5566
 spring:
   redis:
     host: node.td-k8s.com
     port: 1379
     password: mWRK6joVy5No
-#    host: localhost
-#    port: 6379
     database: 5
-    #连接超时时间
     timeout: 2000
     jedis:
       pool:
-        #最大连接数
         max-active: 8
-        #最大阻塞等待时间(负数表示没限制)
         max-wait: -1
-        #最大空闲
         max-idle: 8
-        #最小空闲
         min-idle: 0
   datasource:
     url: jdbc:sqlserver://10.100.12.101:1433;DatabaseName=www_JunTe_com
