@@ -66,6 +66,9 @@ public class SearchController {
 
     CodeDTO returnMsg(String code){
         if(code != null || code != ""){
+            if(code.length() == 4){
+                code = '0' + '0'+ code;
+            }
             if(code.length() == 5){
                 code = '0'+ code;
             }
