@@ -39,7 +39,7 @@ public class RedisCfg {
         return template;
     }
 
-    @Bean
+    @Bean("stringRedisTemplate")
     @ConditionalOnMissingBean(StringRedisTemplate.class)
     public StringRedisTemplate stringRedisTemplate(
             RedisConnectionFactory redisConnectionFactory) {
